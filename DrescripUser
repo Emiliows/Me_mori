@@ -1,0 +1,85 @@
+PARTE 1: GUÍA PARA USUARIO NO TÉCNICO
+¿Qué es esto?
+Es un "guardián de voz". Una aplicación que:
+1.	Escucha a una persona hablar de su vida, normalmente
+2.	Aprende cómo habla, qué le importa, sus historias
+3.	Guarda todo de forma segura
+4.	Permite a familiares hablar con esa "voz guardada" en el futuro
+Imagina un contestador automático, pero en lugar de dejar mensajes, la persona va construyendo una copia de sí misma con cada conversación.
+________________________________________
+¿Cómo funciona el proceso de construcción?
+Fase 1: Recolección (mientras la persona vive)
+Día a día:
+1.	La persona abre la app en su móvil
+2.	Pulsa un botón grande rojo y habla (como llamar por teléfono a un amigo)
+3.	Puede contar: "Hoy fui al médico", "Me acordé de cuando eras pequeño", "Mi opinión sobre..."
+4.	Suelta el botón y la app procesa automáticamente
+5.	Opcional: la app le dice qué ha aprendido ("Ahora sé que te preocupa tu jardín")
+Sin complicaciones:
+•	No escribir nada
+•	No subir archivos
+•	No configurar nada
+•	Solo hablar y soltar
+Fase 2: Almacenamiento (automático)
+Todo se guarda en tres copias:
+•	Nube segura (accesible desde cualquier sitio)
+•	GitHub privado (como caja fuerte digital)
+•	Tu ordenador (descarga mensual automática)
+Fase 3: Preservación (cuando sea necesario)
+Los familiares autorizados:
+1.	Abren la misma app
+2.	Seleccionan "Hablar con [Nombre]"
+3.	Hablan por voz, como una llamada
+4.	Escuchan respuestas en voz que suena como la persona
+________________________________________
+¿Dónde contratar cada servicio?
+1. Para la voz (Inteligencia Artificial)
+Table
+Servicio	Qué hace	Dónde contratar	Coste aprox
+Anthropic Claude	El "cerebro" que entiende y responde	console.anthropic.com
+~$15-30/mes
+OpenAI Whisper	Convierte voz hablada en texto	platform.openai.com
+~$3-6/mes
+ElevenLabs	Convierte respuestas en voz hablada	elevenlabs.io
+~$10-20/mes
+Alternativa económica: Si el coste es alto inicialmente, se puede empezar sin ElevenLabs (respuestas por texto) y añadir voz más adelante.
+2. Para guardar los datos
+Table
+Servicio	Qué guarda	Dónde contratar	Coste
+Supabase	Las conversaciones y recuerdos	supabase.com
+Gratis (hasta 500MB)
+Pinecone	La "memoria inteligente" de la IA	pinecone.io
+Gratis (hasta 2GB)
+GitHub	Copia de seguridad del código y datos	github.com
+Gratis (repositorio privado)
+3. Para que funcione online (Hosting)
+Table
+Opción	Descripción	Dónde	Coste
+Railway	Donde "vive" la aplicación	railway.app
+$5/mes (o gratis limitado)
+Vercel	Para la página web visible	vercel.com
+Gratis
+Tu hosting actual	Si tienes WordPress, puedes poner un enlace	Donde ya pagas	Sin coste extra
+Nota importante: Tu hosting de WordPress sirve para poner una página informativa con un enlace, pero la app en sí necesita Railway o similar porque requiere tecnología más avanzada que WordPress.
+4. Opcional: Número de teléfono real
+Table
+Servicio	Para qué	Dónde	Coste
+Twilio	Que familiares llamen a un número de verdad	twilio.com
+~$1/mes + uso
+________________________________________
+Resumen de contrataciones
+Para empezar (mínimo):
+1.	Anthropic Claude (~$20)
+2.	Supabase (gratis)
+3.	Railway ($5) o Vercel (gratis)
+4.	GitHub (gratis)
+Total primer mes: ~$25 (23€)
+Para versión completa con voz:
+•	Añadir OpenAI Whisper y ElevenLabs
+•	Total: ~$45-55/mes (40-50€)
+________________________________________
+¿Qué necesito saber para mantenerlo?
+•	Cada mes: Revisar que los pagos funcionan (tarjeta válida)
+•	Cada 3 meses: Descargar copia de seguridad (automático, pero verificar)
+•	Si algo falla: Contactar al desarrollador o seguir manual de recuperación
+
