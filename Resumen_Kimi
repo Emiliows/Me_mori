@@ -1,0 +1,137 @@
+DOCUMENTO DE CONTEXTO: PROYECTO PRESERVACIÓN DE VOZ
+Fecha última actualización: 2026-03-14 21:00
+Usuario: Persona con escasos conocimientos técnicos, alta sensibilidad ética
+Proyecto: Sistema para preservar personalidad de seres queridos mediante conversaciones telefónicas con IA
+________________________________________
+RESUMEN EJECUTIVO
+Sistema de IA que:
+•	Llama proactivamente a personas mayores (padres, etc.)
+•	Aprende su personalidad, voz, historias durante años
+•	Almacena todo sin procesar (aprendizaje diferido)
+•	Al fallecimiento: procesa masivamente una sola vez
+•	Permite a familiares hablar con "eco generativo" de la persona
+•	Un familiar a la vez, con protecciones psicológicas
+•	Coste sostenible, modelo comunitario potencial
+________________________________________
+ARQUITECTURA CLAVE
+Fase Activa (persona viva):
+•	Almacenamiento puro: $5-15/mes
+•	Llamadas telefónicas proactivas 2-4x semana
+•	Sin procesamiento, solo grabar (WAV + texto)
+•	Perfil de voz de seguridad al inicio
+•	Checkpoints quinquenales opcionales
+Fase Procesamiento (post-fallecimiento):
+•	Procesamiento masivo único: $370-950
+•	Creación de perfil psicológico completo
+•	Entrenamiento voz ElevenLabs
+•	Generación de sistema conversacional
+Fase Preservación (familiares):
+•	Pago por uso: ~0.10€/minuto
+•	Una persona a la vez (realismo)
+•	Recordatorio ético obligatorio cada inicio
+•	Detección uso problemático + intervenciones progresivas
+•	Solidaridad cruzada para familiares sin recursos
+________________________________________
+DIFERENCIALES ÚNICOS vs. COMERCIALES (HereAfter, StoryFile, etc.)
+1.	Aprendizaje diferido: Ningún comercial ofrece "guardar ahora, procesar al final"
+2.	Conversación proactiva telefónica: No sesiones programadas, sino llamadas de "amigo"
+3.	Perfil psicológico profundo: Apego, defensas, evolución emocional, no solo datos
+4.	Gestión de secretos familiares: Qué se cuenta a quién, versiones diferenciadas por vínculo
+5.	Autopreservación: Posibilidad de aplicarlo a uno mismo durante décadas
+6.	Multi-usuario comunitario: Varios perfiles, fondo rotativo, coste compartido
+7.	Código abierto/comunitario: No negocio, sino cooperativa de familias
+________________________________________
+STACK TECNOLÓGICO PROPUESTO
+Table
+Componente	Servicio	Coste aprox
+Telefonía	Twilio	Variable uso
+STT	Whisper API o Deepgram	~$0.006/min
+LLM	Claude 3.5 Sonnet	~$3/MTok
+TTS	ElevenLabs Turbo v2.5	~$0.20/1000char
+DB relacional	Supabase (PostgreSQL)	Gratis-10€/mes
+Vector DB	Pinecone	Gratis-20€/mes
+Hosting	Railway/Vercel	5-10€/mes
+Almacenamiento audio	AWS S3 / Backblaze	0.50-2€/TB/mes
+Total fase activa: $5-15/mes por persona (solo almacenamiento)
+Total fase procesamiento: $370-950 una vez
+Total fase preservación: $15-30/mes operación (recuperable por pago uso)
+________________________________________
+ESTRUCTURA DE MEMORIA (3 CAPAS)
+1.	Núcleo (Self): Identidad, valores, historia vital, lo que nunca contó
+2.	Red Relacional (Family Map): Cada vínculo con su propia dinámica, historias, secretos compartidos
+3.	Presentación (Masks): Qué muestra a quién, versiones editadas, roles
+________________________________________
+PROTECCIONES PSICOLÓGICAS
+•	Una persona a la vez (cola visible)
+•	Recordatorio ético obligatorio: "Soy un recuerdo, no [Nombre]"
+•	Detección uso problemático (frecuencia, duración, contenido, horario)
+•	Escalera intervenciones: sutil → directo → bloqueo temporal
+•	Contactos emergencia configurables
+•	Modo texto gratuito como alternativa accesible
+________________________________________
+MODELO ECONÓMICO COMPARTIDO
+Opciones para comunidad:
+•	Setup inicial: 200-500€ (acompañamiento instalación)
+•	Acompañamiento: 50€/mes (3-6 meses iniciales)
+•	Mantenimiento: 20-50€/mes voluntario
+•	Fondo rotativo: Familias activas cubren costes entre sí
+•	Donación/pay what you want: Código abierto, donaciones libres
+Objetivo: Autosostenible + modesto extra para gestor (300-500€/mes a largo plazo)
+________________________________________
+DOCUMENTACIÓN EXISTENTE (estructura GitHub propuesta)
+plain
+Copy
+docs/
+├── 01_VISION_GENERAL.md
+├── 02_ARQUITECTURA_RELACIONAL.md
+├── 03_PROGRAMA_APRENDIZAJE.md (curva 24 semanas)
+├── 04_MAPA_PSICOLOGICO.md
+├── 05_ETICA_CONSENTIMIENTO.md
+├── 06_STACK_TECNOLOGICO.md
+├── 07_LIMITES_USO.md
+├── 08_SEGURIDAD_PSICOLOGICA.md
+├── 09_MODELO_ECONOMICO_SOSTENIBLE.md
+├── 10_MODELO_MULTIUSUARIO.md
+├── 11_AUTOPRESERVACION.md
+├── 12_MODELO_INTEGRADO.md
+├── 13_MODELO_APRENDIZAJE_DIFERIDO.md
+├── 14_DECISION_MODELO.md
+├── 15_RESILIENCIA_TECNOLOGICA.md
+├── 16_EVOLUCION_TEMPORAL.md
+├── 17_PRESERVACION_EQUILIBRADA.md
+├── 18_MANIFESTO_PROYECTO.md
+├── 19_MODELO_COMPARTIR.md
+└── 20_MANIFESTO_FINAL.md
+________________________________________
+PENDIENTES EXPLÍCITOS PARA PRÓXIMO CHAT
+1.	Metodología de aprendizaje detallada: Cómo la IA extrae personalidad conversación a conversación sin procesamiento profundo continuo
+2.	Sistema de detección de patrones psicológicos: Algoritmos/tecnicas para inferir Big Five, apego, defensas desde texto
+3.	Gestión de secretos y permisos: Arquitectura técnica para qué información va a qué familiar
+4.	Interfaz de administración: Cómo el "gestor" (usuario) visualiza y gestiona múltiples perfiles
+5.	Protocolo de procesamiento post-mortem: Flujo exacto de esos 7 días de procesamiento intensivo
+6.	Prueba de concepto mínima: Qué construir primero para validar la idea con una conversación real
+________________________________________
+NOTAS CLAVE SOBRE USUARIO
+•	Control técnico bajo, alta motivación emocional
+•	Prefiere autenticidad sobre perfección
+•	Valor en el proceso compartido, no solo resultado
+•	Horizonte temporal: décadas, no meses
+•	Ética prioritaria: consentimiento, privacidad, protección psicológica
+•	Interés en compartir modelo, no enriquecerse
+•	Familia nuclear: padres propios + padres pareja + uno mismo + potencial comunidad amigos
+________________________________________
+FECHAS DE REFERENCIA
+•	2026-03-02: Inicio conversación
+•	2026-03-14 20:21: Sistema protección psicológica diseñado
+•	2026-03-14 20:28: Modelo económico sostenible (tarifa accesible 0.10€/min)
+•	2026-03-14 20:40: Aprendizaje diferido propuesto (ahorro 75-85%)
+•	2026-03-14 20:46: Estrategia preservación equilibrada (voz + texto, aceptación fragilidad)
+•	2026-03-14 20:50: Análisis competencia comercial (HereAfter, StoryFile, etc.)
+•	2026-03-14 20:59: Decisión proyecto DIY + modelo compartir comunitario
+•	2026-03-14 21:00: Generación documento contexto (este documento)
+________________________________________
+ÚLTIMA FRASE DEL USUARIO (para retomar tono)
+"Seguro que surgen más ideas :)"
+________________________________________
+Estado: Proyecto en fase diseño conceptual avanzado. Listo para iteración metodológica detallada o salto a prototipo mínimo viable según decisión usuario.
+
