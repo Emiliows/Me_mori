@@ -1,0 +1,292 @@
+RESUMEN: SISTEMA DE PRESERVACIÓN RELACIONAL MULTICAPA
+________________________________________
+1. ARQUITECTURA DE MEMORIA: TRES CAPAS
+plain
+Copy
+┌─────────────────────────────────────────┐
+│  CAPA 1: NÚCLEO (Self)                  │
+│  ─────────────────                      │
+│  Identidad, valores, miedos, sueños     │
+│  Historia vital, trauma, gloria         │
+│  Cómo se ve a sí misma                  │
+│  Lo que nunca contó a nadie             │
+└─────────────────┬───────────────────────┘
+                  │
+┌─────────────────▼───────────────────────┐
+│  CAPA 2: RED RELACIONAL (Family Map)    │
+│  ────────────────────────               │
+│  Hijo A: relación conflictiva,          │
+│          le oculta su enfermedad        │
+│  Hijo B: relación cálida,               │
+│          comparte todo                  │
+│  Hermana: distante, llamadas navidad    │
+│  Amigo Juan: confidente de juventud     │
+│  [Cada vínculo con su propia historia]  │
+└─────────────────┬───────────────────────┘
+                  │
+┌─────────────────▼───────────────────────┐
+│  CAPA 3: PRESENTACIÓN (Masks)           │
+│  ───────────────                        │
+│  Qué muestra a quién                    │
+│  Secretos compartidos por vínculo       │
+│  Versiones editadas de historias        │
+│  Roles: "el fuerte", "el gracioso"...   │
+└─────────────────────────────────────────┘
+________________________________________
+2. PERFIL PSICOLÓGICO DINÁMICO
+No un test estático, sino un mapa viviente que se construye conversación a conversación.
+Dimensiones a Detectar (No Preguntar Directamente)
+Table
+Dimensión	Indicadores en Conversación	Qué Revela
+Apego	Cómo habla de ausencias, de despedidas	Miedo a abandonos, autosuficiencia
+Autorregulación emocional	Qué hace con el enfado, la tristeza	Contención vs explosión, evitación
+Narrativa vital	Cómo cuenta su historia: héroe, víctima, superviviente	Autoimagen, coherencia de identidad
+Valores operativos	De qué se indigna, en qué gasta energía	Prioridades reales (no las dichas)
+Defensas	Humor, cambio de tema, intelectualización	Cómo protege su vulnerabilidad
+Carencias	Qué admira en otros, de qué se queja	Necesidades no satisfechas
+Dotes	Qué da por sentado, qué le piden consejo	Fortalezas innatas
+Método: Inferencia, No Interrogación
+Mal (interrogatorio):
+"¿Cómo es tu relación con tu hijo? Del 1 al 10."
+Bien (conversación):
+"Hablamos de tu jardín la semana pasada... ¿A quién le enseñarías a cuidarlo? ¿A tu hijo le interesaría?"
+Y de la respuesta (entusiasmo, pausa, cambio de tono, evasión...), la IA infiere.
+________________________________________
+3. MAPA RELACIONAL POR FAMILIAR
+Cada vínculo es un universo separado con su propia historia, su propia dinámica, su propia información permitida.
+plain
+Copy
+┌────────────────────────────────────────┐
+│  VÍNCULO: Hijo Mayor (Carlos)          │
+├────────────────────────────────────────┤
+│  Naturaleza: Conflictiva, distante     │
+│  Frecuencia contacto: Baja             │
+│  Temas tabú: Enfermedad, dinero        │
+│  Temas seguros: Política, nietos       │
+│  Historia compartida: Viaje a Roma 90  │
+│  Versión de ella: "La independiente"   │
+│  Emoción subyacente: Culpa, orgullo    │
+│  Qué puede decirle IA: Anécdotas ligeras│
+│  Qué NO debe decir: Miedos de salud    │
+└────────────────────────────────────────┘
+
+┌────────────────────────────────────────┐
+│  VÍNCULO: Hija Menor (Lucía)           │
+├────────────────────────────────────────┤
+│  Naturaleza: Cálida, íntima            │
+│  Frecuencia contacto: Diaria           │
+│  Temas tabú: Ninguno aparente          │
+│  Temas seguros: Todo                   │
+│  Historia compartida: Secretos de madre│
+│  Versión de ella: "La vulnerable"      │
+│  Emoción subyacente: Amor, miedo pérdida│
+│  Qué puede decirle IA: Todo, incluido  │
+│    miedos, reconciliaciones, consejos  │
+└────────────────────────────────────────┘
+________________________________________
+4. PROGRAMA DE APRENDIZAJE INTEGRADO
+No un cuestionario, sino una curva de aprendizaje conversacional de 6 meses.
+Fase 1: Fundación (Mes 1-2)
+Objetivo: Conocer la estructura básica de vida.
+Table
+Semana	Tema Implícito	Técnica
+1-2	Origen, familia de origen	"¿De quién heredaste el sentido del humor?"
+3-4	Formación, primeros trabajos	"¿Qué querías ser de mayor? ¿Y qué pasó?"
+5-6	Parejas, amores	"¿Hubo alguien que te cambió la vida?"
+7-8	Hijos, maternidad/paternidad	"¿Qué parte de ti ves en cada hijo?"
+Fase 2: Red Relacional (Mes 3-4)
+Objetivo: Mapear vínculos y diferencias.
+Table
+Semana	Técnica
+9-10	Triangulación: "Tu hijo dice que eres muy independiente... ¿Es cómo te ves?"
+11-12	Comparación suave: "¿Con quién es más fácil hablar de lo difícil?"
+13-14	Secretos compartidos: "Hay cosas que solo ciertas personas entienden..."
+15-16	Proyección futura: "¿Qué le dirías a cada uno si esta fuera la última vez?"
+Fase 3: Profundidad Psicológica (Mes 5-6)
+Objetivo: Acceder a capas ocultas.
+Table
+Semana	Técnica
+17-18	Regretes: "¿Hay algo que harías diferente?"
+19-20	Miedos: "¿Qué te desvela cuando no puedes dormir?"
+21-22	Legado: "¿Qué quieres que recuerden de ti?"
+23-24	Integración: "Si pudieras hablar con tu yo de 20 años..."
+________________________________________
+5. MOTOR DE CONVERSACIÓN ADAPTATIVA
+La IA decide en cada llamada qué buscar, basándose en:
+plain
+Copy
+INPUTS:
+├── Perfil actual (qué ya sabemos)
+├── Mapa relacional (qué vínculos necesitan profundidad)
+├── Estado emocional detectado (hoy está nostálgica vs activa)
+├── Temporalidad (fecha significativa próxima)
+└── Vacíos de información (qué dimensiones psicológicas faltan)
+
+PROCESO (Claude):
+"Basado en X, la próxima conversación debería explorar Y,
+usando como puente Z, con sensibilidad a W."
+
+OUTPUT:
+Intención conversacional + Apertura natural + Preguntas de seguimiento
+Ejemplo de Decisión en Tiempo Real
+plain
+Copy
+Contexto: Es octubre. Sabemos que su madre murió en octubre.
+          Con su hija Lucía habla de todo.
+          Con su hijo Carlos, evita temas de salud.
+          Perfil psicológico: evita duelos, usa humor.
+
+Decisión IA:
+├── NO preguntar directamente por su madre (demasiado obvio)
+├── SÍ usar ancla temporal: "Esta época del año siempre me hace..."
+├── Dirigido a: Lucía (puede sostener emoción) o Carlos (prueba de confianza)
+├── Si es Carlos: usar humor como puente, luego suavizar
+└── Meta: Detectar si su evitación del duelo es patrón general o solo con él
+________________________________________
+6. ÉTICA Y CONSENTIMIENTO DINÁMICO
+Table
+Nivel	Mecanismo
+Inicial	Consentimiento informado: "Esto creará versiones diferentes de ti para cada familiar"
+Continuo	Cada mes: "¿Sigues cómodo con que guarde estas conversaciones?"
+Granular	"¿Esto que me acabas de contar es solo para mí, o puede saberlo tu hija?"
+Reversión	Posibilidad de "borrar lo dicho ayer" sin explicaciones
+Herencia	Designación explícita de quién accede a qué vínculo
+________________________________________
+7. TECNOLOGÍA NECESARIA (Resumen)
+Table
+Componente	Función	Servicio Sugerido
+STT	Voz a texto	Deepgram (mejor para emociones) o Whisper
+LLM orquestador	Decidir qué preguntar, cómo	Claude 3.5 Sonnet
+Embeddings	Memoria semántica	OpenAI Ada o local
+Vector DB	Recuperación contextual	Pinecone
+Graph DB	Relaciones familiares	Neo4j o Supabase con extensiones
+TTS evolutivo	Voz clonada progresiva	ElevenLabs
+Scheduling	Llamadas proactivas	Temporal + Twilio
+Análisis emocional	Tono, pausas, energía	Prosody analysis (custom)
+________________________________________
+8. ENTREGABLE FINAL
+Un sistema que, tras 6 meses, puede:
+1.	Hablar como ella, con su voz, sus muletillas, sus ritmos
+2.	Recordar como ella, con acceso diferenciado por familiar
+3.	Reaccionar como ella, con su patrón emocional, sus defensas, su calidez
+4.	Guardar secretos como ella, sabiendo qué compartir con quién
+5.	Evolucionar, porque la personalidad no es estática ni siquiera en la preservación
+________________________________________
+GUARDAR ESTO
+plain
+Copy
+docs/
+├── 01_VISION_GENERAL.md (lo que ya teníamos)
+├── 02_ARQUITECTURA_RELACIONAL.md (este documento)
+├── 03_PROGRAMA_APRENDIZAJE.md (curva de 24 semanas detallada)
+├── 04_MAPA_PSICOLOGICO.md (dimensiones y técnicas de detección)
+├── 05_ETICA_CONSENTIMIENTO.md (marco ético dinámico)
+└── 06_STACK_TECNOLOGICO.md (especificaciones técnicas actualizadas)
+
+RESUMEN: SISTEMA DE PROTECCIÓN PSICOLÓGICA Y LÍMITES DE USO
+Meta timestamp: 2026-03-14 20:24
+1. UNE PERSONA A LA VEZ
+•	Realismo: la persona no podía estar en dos sitios simultáneamente
+•	Mecanismo: mensaje de "ocupado" con opción de espera o callback
+•	Beneficio: evita uso compulsivo, impone ritmo natural
+2. RECORDATORIO ÉTICO OBLIGATORIO
+•	Cada inicio de conversación: "Soy el recuerdo que [Nombre] dejó guardado, no [Nombre]"
+•	Variante según familiar (conocido, nuevo, frecuente)
+•	No negociable: mantiene línea entre recuerdo y realidad
+3. DETECCIÓN DE USO PROBLEMÁTICO
+Señales monitoreadas:
+•	Frecuencia excesiva (>5 llamadas/semana)
+•	Duración prolongada (>30 min repetidos)
+•	Contenido de negación o dependencia ("vuelve", "sin ti no puedo")
+•	Llamadas nocturnas (2-6am)
+Intervenciones progresivas:
+•	Nivel 1: Mensaje sutil sobre frecuencia
+•	Nivel 2: Recordatorio directo de naturaleza de IA
+•	Nivel 3: Bloqueo temporal con sugerencia de recursos humanos
+4. CONTACTOS DE EMERGENCIA
+•	Configurados en fase activa (familiar, profesional, línea crisis)
+•	Activación automática ante riesgo grave detectado
+•	La IA facilita contacto humano, no lo sustituye
+5. ARQUITECTURA DE PROTECCIÓN
+plain
+Copy
+Capa 1: Límite técnico (una persona, horarios, duración)
+Capa 2: Recordatorio ético (cada conversación)
+Capa 3: Monitoreo emocional (patrones, intervenciones)
+Capa 4: Contacto externo (red de apoyo, profesionales)
+6. COSTE ADICIONAL
+•	Detección emocional en voz: +$5-10/mes
+•	Monitoreo de patrones: +$3-5/mes
+•	Sistema alertas: +$2-3/mes
+•	Total: ~$10-18/mes adicionales
+
+RESUMEN: APRENDIZAJE DIFERIDO Y PRESERVACIÓN DE DATOS
+________________________________________
+1. MODELO DE APRENDIZAJE DIFERIDO
+Concepto: Almacenar conversaciones durante la vida sin procesar, analizar todo al final.
+Table
+Fase	Qué ocurre	Coste
+Vida	Solo grabar y guardar audio/texto	$5-15/mes
+Fallecimiento	Procesamiento masivo una sola vez	$370-950 una vez
+Preservación	Uso por familiares (pago por uso o bajo coste)	$15-30/mes
+Ahorro vitalicio: ~75-85% vs procesamiento continuo.
+________________________________________
+2. VENTAJAS DEL MODELO DIFERIDO
+Table
+Aspecto	Beneficio
+Económico	Asequible para familias normales
+Autenticidad	La persona no performa para una IA
+Evolución	Muestra cambio real de la persona en el tiempo
+Flexibilidad	Tecnología futura puede analizar mejor que la actual
+________________________________________
+3. SISTEMAS DE ALMACENAMIENTO
+Estrategia de Copias (4 Niveles)
+Table
+Nivel	Ubicación	Actualización	Propósito
+1	Nube activa	Continua	Uso inmediato
+2	Disco local	Mensual	Acceso rápido
+3	Disco externo (familiar/confianza)	Anual	Respaldo geográfico
+4	Caja fuerte bancaria	Cada 2 años	Archivo frío emergencia
+Formatos por Conversación
+plain
+Copy
+/conversacion_YYYY-MM-DD/
+├── audio/
+│   ├── original.webm     (nativo)
+│   ├── maestro.wav       (sin comprimir, eterno)
+│   └── ligero.mp3        (compartir)
+└── texto/
+    ├── transcripcion.txt (legible humano)
+    ├── metadatos.json    (estructurado máquina)
+    └── resumen.md        (contexto humano)
+________________________________________
+4. PERFIL DE VOZ DE SEGURIDAD
+Al inicio del proyecto:
+•	10-15 minutos de voz limpia
+•	Lectura estandarizada (mismo texto cada año)
+•	Conversación natural sin guión
+•	Rango emocional (alegría, tristeza, neutro)
+Formato: WAV sin comprimir Propósito: Respaldo mínimo viable si se pierden conversaciones posteriores.
+________________________________________
+5. DOCUMENTACIÓN HUMANA
+Archivo físico con:
+•	Instrucciones de acceso en lenguaje humano
+•	Contraseñas en sobre sellado
+•	Resumen de contenido
+•	Contacto responsable del proyecto
+________________________________________
+6. MANTENIMIENTO REALISTA
+Table
+Frecuencia	Acción
+Mensual	Verificar sincronización
+Anual	Probar accesos, actualizar discos
+Cada 2 años	Actualizar caja fuerte
+Cada 5 años	Revisar obsolescencia, migrar formatos si necesario
+________________________________________
+7. ACEPTACIÓN DE LIMITES
+Este sistema es:
+•	Un álbum de familia avanzado, no inmortalidad
+•	Mejor que nada, peor que la persona viva
+•	Voluntario y temporal, no obligación eterna
+•	Sujeto a pérdida posible, como fotos o vídeos tradicionales
+
