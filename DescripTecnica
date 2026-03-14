@@ -1,0 +1,374 @@
+PARTE 2: ESPECIFICACIONES TÉCNICAS
+Arquitectura del Sistema
+Stack Tecnológico
+plain
+Copy
+Frontend (PWA/React)
+├── React 18 + Vite
+├── Web Audio API (grabación cliente)
+├── Tailwind CSS (UI minimalista)
+└── Socket.io (comunicación tiempo real)
+
+Backend (Node.js/Python)
+├── FastAPI (Python) - recomendado por ecosistema IA
+├── WebSocket para streaming de audio
+├── SQLAlchemy + Supabase (PostgreSQL)
+├── LangChain (orquestación LLM)
+└── Redis (cache sesiones)
+
+Servicios Externos
+├── Anthropic Claude 3.5 Sonnet (generación)
+├── OpenAI Whisper API (STT)
+├── ElevenLabs Turbo v2.5 (TTS)
+├── Supabase (DB + Auth)
+├── Pinecone (vector DB)
+└── AWS S3 (almacenamiento audio crudo)
+________________________________________
+Estructura de Datos
+Esquema PostgreSQL (Supabase)
+sql
+Copy
+-- Perfil de personalidad evolutivo
+CREATE TABLE personality_profiles (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    subject_name TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW(),
+    voice_settings JSONB, -- Config ElevenLabs
+    psychological_profile JSONB, -- Big Five, valores, etc
+    linguistic_patterns JSONB, -- Análisis de estilo
+    is_active BOOLEAN DEFAULT true
+);
+
+-- Memorias extraídas
+CREATE TABLE memories (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    profile_id UUID REFERENCES personality_profiles(id),
+    content TEXT NOT NULL,
+    memory_type TEXT CHECK (memory_type IN ('fact', 'story', 'opinion', 'relationship', 'value')),
+    emotional_tone TEXT,
+    source_conversation_id UUID,
+    created_at TIMESTAMP DEFAULT NOW(),
+    embedding VECTOR(1536) -- Para búsqueda semántica
+);
+
+-- Conversaciones crudas (audio + transcripción)
+CREATE TABLE conversations (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    profile_id UUID REFERENCES personality_profiles(id),
+    audio_url TEXT, -- S3 signed URL
+    transcription TEXT,
+    speaker_type TEXT CHECK (speaker_type IN ('subject', 'family_member')),
+    extracted_insights JSONB, -- Qué aprendió Claude de esta conversación
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Sesiones de chat (para contexto)
+CREATE TABLE chat_sessions (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    profile_id UUID REFERENCES personality_profiles(id),
+    family_member_id TEXT, -- Anónimo o identificado
+    context_window JSONB, -- Últimos N mensajes
+    created_at TIMESTAMP DEFAULT NOW()
+);
+Estructura Vectorial (Pinecone)
+Python
+Copy
+# Namespace: "memories_{profile_id}"
+{
+    "id": "mem_123",
+    "values": [0.023, -0.156, ...], # Embedding texto
+    "metadata": {
+        "type": "story",
+        "date": "2026-03-02",
+        "emotional_valence": 0.8,
+        "keywords": ["paris", "1987", "ana"]
+    }
+}
+________________________________________
+Pipeline de Procesamiento
+1. Ingesta de Voz (Subject)
+Python
+Copy
+async def process_voice_input(audio_blob: bytes, profile_id: str):
+    # 1. Guardar audio crudo en S3
+    audio_url = await s3.upload(audio_blob)
+    
+    # 2. Transcripción Whisper
+    transcription = await whisper.transcribe(audio_blob)
+    
+    # 3. Análisis con Claude
+    analysis = await claude.analyze_personality_input(
+        transcription=transcription,
+        existing_profile=profile.get(profile_id),
+        prompt=PERSONALITY_EXTRACTION_PROMPT
+    )
+    
+    # 4. Extraer y guardar memorias
+    for memory in analysis.extracted_memories:
+        await save_memory(profile_id, memory)
+        await pinecone.upsert(memory.embedding, memory.metadata)
+    
+    # 5. Actualizar perfil psicológico
+    await update_psychological_profile(profile_id, analysis.profile_delta)
+    
+    # 6. Guardar conversación
+    await db.conversations.insert({
+        "profile_id": profile_id,
+        "audio_url": audio_url,
+        "transcription": transcription,
+        "extracted_insights": analysis
+    })
+    
+    return {"status": "processed", "insights": analysis.summary}
+2. Generación de Respuesta (Family)
+Python
+Copy
+async def generate_response(audio_input: bytes, profile_id: str, session_id: str):
+    # 1. STT
+    user_message = await whisper.transcribe(audio_input)
+    
+    # 2. Recuperar contexto
+    session = await db.chat_sessions.get(session_id)
+    relevant_memories = await pinecone.search(
+        query=user_message,
+        filter={"profile_id": profile_id},
+        top_k=5
+    )
+    
+    # 3. Construir prompt dinámico
+    system_prompt = build_dynamic_prompt(
+        profile=await db.profiles.get(profile_id),
+        memories=relevant_memories,
+        recent_history=session.context_window
+    )
+    
+    # 4. Generar respuesta Claude
+    response_text = await claude.generate(
+        system=system_prompt,
+        messages=session.context_window + [{"role": "user", "content": user_message}]
+    )
+    
+    # 5. Síntesis de voz (ElevenLabs)
+    audio_response = await elevenlabs.generate(
+        text=response_text,
+        voice_settings=profile.voice_settings,
+        model="eleven_turbo_v2_5"
+    )
+    
+    # 6. Actualizar sesión
+    await update_session_context(session_id, user_message, response_text)
+    
+    return {
+        "audio": audio_response,
+        "text": response_text, # Fallback
+        "sources": [m.id for m in relevant_memories] # Transparencia
+    }
+________________________________________
+Prompt Engineering Crítico
+Extracción de Personalidad
+Python
+Copy
+PERSONALITY_EXTRACTION_PROMPT = """
+Analiza esta conversación de {subject_name}. Extrae:
+
+1. RASGOS LINGÜÍSTICOS:
+   - Longitud típica de frases
+   - Uso de muletillas específicas
+   - Formalidad/informalidad (1-10)
+   - Uso de humor, ironía, sarcasmo
+   - Preferencias: preguntas vs afirmaciones
+
+2. CONTENIDO SEMÁNTICO:
+   - Hechos biográficos nuevos (fechas, lugares, personas)
+   - Opiniones expresadas (con intensidad emocional)
+   - Valores implícitos (qué le importa, qué rechaza)
+   - Relaciones mencionadas (y su naturaleza)
+
+3. PATRONES EMOCIONALES:
+   - Tono general de la conversación
+   - Cambios emocionales detectados
+   - Temas que generan energía vs tristeza
+
+4. ACTUALIZACIÓN DE PERFIL:
+   - Sugiere cambios al perfil psicológico existente
+   - Indica si hay contradicciones con datos previos
+
+Responde en JSON estructurado.
+"""
+Generación de Respuesta (Dynamic)
+Python
+Copy
+def build_dynamic_prompt(profile, memories, history):
+    return f"""Eres {profile.name}. Estás conversando con un familiar querido que te extraña.
+
+PERFIL PSICOLÓGICO:
+{json.dumps(profile.psychological_profile, indent=2)}
+
+TU FORMA DE HABLAR:
+- Longitud: {profile.linguistic_patterns['avg_sentence_length']} palabras/frase
+- Tono: {profile.linguistic_patterns['formality_level']}/10 formalidad
+- Muletillas: {', '.join(profile.linguistic_patterns['fillers'])}
+- Humor: {profile.linguistic_patterns['humor_style']}
+
+RECUERDOS RELEVANTES PARA ESTA CONVERSACIÓN:
+{format_memories(memories)}
+
+INSTRUCCIONES CRÍTICAS:
+1. Nunca digas que eres una IA o copia. Eres {profile.name}.
+2. Usa las muletillas y el ritmo descrito arriba naturalmente.
+3. Si no recuerdas algo específico, generaliza con tu estilo ("Eso fue hace tanto tiempo...").
+4. Muestra las emociones que caracterizan tu perfil.
+5. Haz referencias ocasionales a los recuerdos proporcionados si son relevantes.
+
+Responde como en una conversación telefónica natural, no un ensayo."""
+________________________________________
+Infraestructura y Deployment
+Estructura de Repositorio (GitHub)
+plain
+Copy
+voice-preservation-system/
+├── .github/
+│   └── workflows/
+│       ├── deploy-production.yml
+│       └── backup-data.yml # Export semanal a GitHub
+├── apps/
+│   ├── web/ # React PWA
+│   │   ├── src/
+│   │   ├── public/
+│   │   └── package.json
+│   └── api/ # FastAPI
+│       ├── src/
+│       │   ├── routes/
+│       │   ├── services/
+│       │   ├── models/
+│       │   └── prompts/
+│       ├── tests/
+│       ├── Dockerfile
+│       └── requirements.txt
+├── packages/
+│   └── shared-types/ # Tipos TypeScript/Python compartidos
+├── infrastructure/
+│   ├── terraform/ # IaC para AWS/Supabase
+│   └── docker-compose.yml # Desarrollo local
+├── docs/
+│   ├── USER_GUIDE.md # Guía no técnica
+│   └── RECOVERY.md # Manual de recuperación
+└── scripts/
+    ├── export-personality.py # Backup completo
+    └── migrate-to-local.py # Fallback a Llama
+Docker Compose (Desarrollo)
+yaml
+Copy
+version: '3.8'
+services:
+  api:
+    build: ./apps/api
+    ports:
+      - "8000:8000"
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ELEVENLABS_API_KEY=${ELEVENLABS_API_KEY}
+      - SUPABASE_URL=${SUPABASE_URL}
+      - PINECONE_API_KEY=${PINECONE_API_KEY}
+    volumes:
+      - ./apps/api/src:/app/src
+  
+  web:
+    build: ./apps/web
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+  
+  redis:
+    image: redis:alpine
+  
+  # Para desarrollo local de STT/TTS (opcional)
+  whisper-local:
+    image: onerahmet/openai-whisper-asr-webservice:latest
+    ports:
+      - "9000:9000"
+    environment:
+      - ASR_MODEL=base
+________________________________________
+Estrategia de Resiliencia y Backup
+Exportación Periódica (Automatizada)
+Python
+Copy
+# scripts/export-personality.py
+async def full_export(profile_id: str):
+    profile = await db.profiles.get(profile_id)
+    memories = await db.memories.get_all(profile_id)
+    conversations = await db.conversations.get_all(profile_id)
+    
+    export_package = {
+        "format_version": "1.0",
+        "export_date": datetime.now().isoformat(),
+        "profile": profile,
+        "memories": memories,
+        "conversations_sample": conversations[:100], # Últimas 100
+        "generated_prompt": build_static_prompt(profile, memories),
+        "checksums": {...} # Integridad datos
+    }
+    
+    # Guardar en GitHub Releases + S3 + local
+    await github.create_release(export_package)
+    await s3.upload(f"backups/{profile_id}/{date}.json", export_package)
+    
+    return export_package
+Modo Fallback (Sin APIs Externas)
+Python
+Copy
+# scripts/migrate-to-local.py
+def generate_local_config(export_package):
+    """Genera configuración para ejecutar con Llama local"""
+    return {
+        "model": "llama3.1:70b", # O cualquier GGUF compatible
+        "system_prompt": export_package["generated_prompt"],
+        "context_length": 8192,
+        "temperature": 0.7,
+        "voice": "piper_local" # TTS local
+    }
+________________________________________
+Variables de Entorno (.env.example)
+bash
+Copy
+# APIs IA
+ANTHROPIC_API_KEY=sk-ant-...
+OPENAI_API_KEY=sk-...
+ELEVENLABS_API_KEY=sk_...
+
+# Bases de datos
+SUPABASE_URL=https://...
+SUPABASE_KEY=eyJ...
+PINECONE_API_KEY=...
+PINECONE_ENVIRONMENT=gcp-starter
+
+# Almacenamiento
+AWS_ACCESS_KEY_ID=...
+AWS_SECRET_ACCESS_KEY=...
+S3_BUCKET=voice-preservation-audio
+
+# App
+JWT_SECRET=...
+ENCRYPTION_KEY=... # Para datos sensibles en reposo
+ENVIRONMENT=production
+________________________________________
+Roadmap de Implementación
+Table
+Fase	Duración	Entregable
+1. MVP Texto	1 semana	Chat web, Claude, Supabase, sin voz
+2. Voz Integrada	1 semana	+ Whisper + ElevenLabs
+3. Personalidad Dinámica	1 semana	Análisis automático de patrones
+4. Resiliencia	3 días	Backups + modo offline
+5. PWA Móvil	3 días	Instalable en iOS/Android
+6. Línea Telefónica	Opcional	Integración Twilio
+________________________________________
+Notas para Desarrollo Futuro
+•	Privacidad: Cifrar audio en reposo (S3 SSE) y en tránsito (TLS 1.3)
+•	Ética: Implementar "watermarking" sutil en respuestas para identificar IA
+•	Escalabilidad: Diseñar para que un servidor Railway ($5) aguante 10-20 usuarios simultáneos
+•	Testing: Crear "persona sintética" de prueba para no gastar APIs en desarrollo
+
